@@ -1,0 +1,10 @@
+[Unit]
+Description=OAI late-packets watchdog (%i)
+After=oai@%i.service
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/usr/local/bin/check-late-packets.sh %i
+StandardOutput=append:/var/log/oai.log
+StandardError=append:/var/log/oai.log

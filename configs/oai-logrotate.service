@@ -1,0 +1,7 @@
+[Unit]
+Description=OAI hourly logrotate
+Documentation=man:logrotate(8)
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/logrotate /etc/logrotate.conf

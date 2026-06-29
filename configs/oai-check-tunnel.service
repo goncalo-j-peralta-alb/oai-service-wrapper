@@ -1,0 +1,10 @@
+[Unit]
+Description=OAI tunnel watchdog
+After=oai@ue.service
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/usr/local/bin/check-tunnel.sh
+StandardOutput=append:/var/log/oai.log
+StandardError=append:/var/log/oai.log

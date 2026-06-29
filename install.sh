@@ -32,29 +32,39 @@ main(){
     fi
 
     if ! command -v ts > /dev/null 2>&1; then
-        apt install moreutils -y
+        apt install -y moreutils
     fi
     if ! command -v jq > /dev/null 2>&1; then
-        apt install jq -y
+        apt install -y jq
     fi
 
     cp configs/oai-stats.json /var/log/
     cp configs/oai-logrotate /etc/logrotate.d/
     cp configs/oai@.service /etc/systemd/system/
-    cp configs/logrotate /etc/cron.hourly/
+    cp configs/oai-check-late-packets@.service /etc/systemd/system/
+    cp configs/oai-check-late-packets@.timer /etc/systemd/system/
+    cp configs/oai-logrotate.service /etc/systemd/system/
+    cp configs/oai-logrotate.timer /etc/systemd/system/
     cp scripts/* /usr/local/bin/
 
     if [ "$node" = "ue" ]; then
         cp watchdogs/check-tunnel.sh /usr/local/bin/
-        (crontab -l ; echo "* * * * * /usr/local/bin/check-tunnel.sh >> /var/log/oai.log") | crontab -
+        cp configs/oai-check-tunnel.service /etc/systemd/system/
+        cp configs/oai-check-tunnel.timer /etc/systemd/system/
     fi
 
     cp watchdogs/check-late-packets.sh /usr/local/bin/
-    (crontab -l ; echo "* * * * * /usr/local/bin/check-late-packets.sh $node >> /var/log/oai.log") | crontab -
 
     systemctl daemon-reload
     systemctl enable oai@$node
     systemctl start oai@$node
+
+    if [ "$node" = "ue" ]; then
+        systemctl enable --now oai-check-tunnel.timer
+    fi
+
+    systemctl enable --now oai-check-late-packets@$node.timer
+    systemctl enable --now oai-logrotate.timer
 }
 
 main "$@"

@@ -1,0 +1,10 @@
+[Unit]
+Description=OAI late-packets watchdog timer (%i)
+
+[Timer]
+OnActiveSec=30s
+OnUnitActiveSec=30s
+AccuracySec=1s
+
+[Install]
+WantedBy=timers.target

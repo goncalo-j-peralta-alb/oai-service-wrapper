@@ -3,6 +3,7 @@
     "cause": {
         "systemd_restart": 0,
         "tunnel_missing": 0,
+        "ping_failed": 0,
         "late_packets": 0
     },
     "restart_history": []

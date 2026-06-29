@@ -1,0 +1,10 @@
+[Unit]
+Description=OAI hourly logrotate timer
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+AccuracySec=1min
+
+[Install]
+WantedBy=timers.target
