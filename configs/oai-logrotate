@@ -2,7 +2,7 @@
     su root root
     hourly
     rotate 10
-    maxsize 500M
+    minsize 100M
     compress
     delaycompress
     missingok

@@ -21,7 +21,6 @@ main(){
     rm -f /usr/local/bin/check-tunnel.sh
     rm -f /usr/local/bin/check-late-packets.sh
     rm -f /etc/systemd/system/oai@.service
-    rm -f /etc/cron.daily/logrotate
 }
 
 main "$@"
