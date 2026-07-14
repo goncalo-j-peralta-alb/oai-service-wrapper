@@ -46,7 +46,7 @@ main(){
 
     if [ "$node" = "ue" ]; then
         cp watchdogs/check-tunnel.sh /usr/local/bin/
-        (crontab -l ; echo "* * * * * /usr/local/bin/check-tunnel.sh >> /var/log/oai.log") | crontab -
+        #(crontab -l ; echo "* * * * * /usr/local/bin/check-tunnel.sh >> /var/log/oai.log") | crontab -
     fi
 
     cp watchdogs/check-late-packets.sh /usr/local/bin/
